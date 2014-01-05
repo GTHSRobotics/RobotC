@@ -41,12 +41,6 @@ void TurnRight()
 	motor[rightfrontdrive] = -100;
 	motor[rightbackdrive] = -100;
 }
-
-
-
-
-
-
 #include "JoystickDriver.c"
 task main()
 {
@@ -90,10 +84,7 @@ task main()
 	{
 		while(SensorValue(ultrasonic) > 30)
 		{
-			motor[leftfrontdrive] = 100;
-			motor[leftbackdrive] = 100;
-			motor[rightfrontdrive] = 100;
-			motor[rightbackdrive] = 100;
+			DriveMotorsForward();
 		}
 	}
 	StopDriveMotors();
