@@ -41,6 +41,15 @@ void TurnRight()
 	motor[rightfrontdrive] = -100;
 	motor[rightbackdrive] = -100;
 }
+void TurnLeft()
+{
+	motor[leftfrontdrive] = -100;
+	motor[leftbackdrive] = -100;
+	motor[rightfrontdrive] = 100;
+	motor[rightbackdrive] = 100;
+}
+
+
 #include "JoystickDriver.c"
 task main()
 {
@@ -117,4 +126,24 @@ task main()
 		DriveMotorsForward();
 	}
 	StopDriveMotors();
+
+	TurnLeft();        //Turn to be perpendicular to ramp
+	wait10Msec(45);
+	StopDriveMotors();
+
+	DriveMotorsForward(); // Drive alongside  ramp
+	wait10Msec(100);
+	StopDriveMotors();
+
+	TurnLeft();           // turn to face ramp
+	wait10Msec(45);
+	StopDriveMotors();
+
+	DriveMotorsForward();  //Drive onto ramp (hopefully)
+	wait10Msec(50);
+	StopDriveMotors();
+
+
+
+
 }
