@@ -115,7 +115,7 @@ task main()
 	motor[liftassembly1] = 0;
 
 	TurnRight();
-	wait10Msec(45);
+	wait1Msec(457);
 
 	StopDriveMotors();
 
