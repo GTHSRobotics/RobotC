@@ -69,139 +69,143 @@ void initializeRobot()
 // At the end of the autonomous period, the FMS will autonmatically abort (stop) execution of the program.
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////
+void DriveMotorsForward()
+{
+	motor[leftfrontdrive] = 100;
+	motor[leftbackdrive] = 100;
+	motor[rightfrontdrive] = 100;
+	motor[rightbackdrive] = 100;
+}
 
+void StopDriveMotors()
+{
+	motor[leftfrontdrive] = 0;
+	motor[leftbackdrive] = 0;
+	motor[rightfrontdrive] = 0;
+	motor[rightbackdrive] = 0;
+}
+
+void DriveMotorsBackward()
+{
+	motor[leftfrontdrive] = -100;
+	motor[leftbackdrive] = -100;
+	motor[rightfrontdrive] = -100;
+	motor[rightbackdrive] = -100;
+}
+
+void TurnRight()
+{
+	motor[leftfrontdrive] = 100;
+	motor[leftbackdrive] = 100;
+	motor[rightfrontdrive] = -100;
+	motor[rightbackdrive] = -100;
+}
+void TurnLeft()
+{
+	motor[leftfrontdrive] = -100;
+	motor[leftbackdrive] = -100;
+	motor[rightfrontdrive] = 100;
+	motor[rightbackdrive] = 100;
+}
 task main()
 {
   initializeRobot();
 
   waitForStart(); // Wait for the beginning of autonomous phase.
 
-	while(SensorValue[irsensor] != 7){
+	while(SensorValue[irsensor] != 7)
+	{
 
-motor[leftfrontdrive] = 100;
-motor[leftbackdrive] = 100;
-motor[rightfrontdrive] = 100;
-motor[rightbackdrive] = 100;
-}
-motor[leftfrontdrive] = 100;
-motor[leftbackdrive] = 100;
-motor[rightfrontdrive] = 100;
-motor[rightbackdrive] = 100;
-wait10Msec(15);
+		DriveMotorsForward();
+	}
 
-motor[leftfrontdrive] = 0;
-motor[leftbackdrive] = 0;
-motor[rightfrontdrive] = 0;
-motor[rightbackdrive] = 0;
-wait10Msec(10);
+	wait10Msec(15);
 
-motor[leftfrontdrive] = 100;
-motor[leftbackdrive] = 100;
-motor[rightfrontdrive] = -100;
-motor[rightbackdrive] = -100;
-wait10Msec(83);
+	StopDriveMotors();
 
-motor[leftfrontdrive] = 0;
-motor[leftbackdrive] = 0;
-motor[rightfrontdrive] = 0;
-motor[rightbackdrive] = 0;
-wait10Msec(5);
+	wait10Msec(10);
 
-if(SensorValue(ultrasonic) < 30){
-	while(SensorValue(ultrasonic) < 30){
-motor[leftfrontdrive] = -100;
-motor[leftbackdrive] = -100;
-motor[rightfrontdrive] = -100;
-motor[rightbackdrive] = -100;
-}
-}
+	TurnRight();
 
-motor[leftfrontdrive] = 0;
-motor[leftbackdrive] = 0;
-motor[rightfrontdrive] = 0;
-motor[rightbackdrive] = 0;
+	wait10Msec(83);
+
+	StopDriveMotors();
+
+	wait10Msec(5);
+
+	if(SensorValue(ultrasonic) < 30)
+	{
+		while(SensorValue(ultrasonic) < 30)
+		{
+			DriveMotorsBackward();
+		}
+	}
+
+	StopDriveMotors();
 
 
-motor[liftassembly1] = 100;
-wait10Msec(650);
-motor[liftassembly1] = 0;
+	motor[liftassembly1] = 100;
+	wait10Msec(600);
+	motor[liftassembly1] = 0;
 
 
+	if(SensorValue(ultrasonic) > 30)
+	{
+		while(SensorValue(ultrasonic) > 30)
+		{
+			DriveMotorsForward();
+		}
+	}
+	StopDriveMotors();
 
 
+	motor[bucketwrist] = -100;
+	wait10Msec(500);
+	motor[bucketwrist] = 0;
 
+	DriveMotorsBackward();
 
+	wait10Msec(25);
 
+	StopDriveMotors();
+	wait10Msec(5);
 
-if(SensorValue(ultrasonic) > 30){
-	while(SensorValue(ultrasonic) > 30){
-motor[leftfrontdrive] = 100;
-motor[leftbackdrive] = 100;
-motor[rightfrontdrive] = 100;
-motor[rightbackdrive] = 100;
-}
-}
-motor[leftfrontdrive] = 0;
-motor[leftbackdrive] = 0;
-motor[rightfrontdrive] = 0;
-motor[rightbackdrive] = 0;
+	motor[liftassembly1] = -100;
+	wait10Msec(325);
 
-motor[bucketwrist] = -100;
-wait10Msec(500);
-motor[bucketwrist] = 0;
+	motor[liftassembly1] = 0;
 
-motor[leftfrontdrive] = -100;
-motor[leftbackdrive] = -100;
-motor[rightfrontdrive] = -100;
-motor[rightbackdrive] = -100;
+	wait10Msec(30);
 
-wait10Msec(25);
+	TurnRight();
+	wait1Msec(1000);
 
-motor[leftfrontdrive] = 0;
-motor[leftbackdrive] = 0;
-motor[rightfrontdrive] = 0;
-motor[rightbackdrive] = 0;
-wait10Msec(5);
+	StopDriveMotors();
+	wait10Msec(30);
 
-motor[liftassembly1] = -100;
+	while(SensorValue(ultrasonic) > 40)
+	{
+		DriveMotorsForward();
+	}
+	StopDriveMotors();
+	wait10Msec(30);
 
-wait10Msec(83);
-wait10Msec(242);
+	TurnLeft();        //Turn to be perpendicular to ramp
+	wait10Msec(100);
+	StopDriveMotors();
+	wait10Msec(30);
 
-motor[liftassembly1] = 0;
+	DriveMotorsForward(); // Drive alongside  ramp
+	wait10Msec(200);
+	StopDriveMotors();
+	wait10Msec(30);
 
-motor[leftfrontdrive] = 100;
-motor[leftbackdrive] = 100;
-motor[rightfrontdrive] = -100;
-motor[rightbackdrive] = -100;
-wait10Msec(83);
+	TurnLeft();           // turn to face ramp
+	wait10Msec(98);
+	StopDriveMotors();
+	wait10Msec(30);
 
-motor[leftfrontdrive] = 0;
-motor[leftbackdrive] = 0;
-motor[rightfrontdrive] = 0;
-motor[rightbackdrive] = 0;
-
-while(SensorValue(ultrasonic) > 40){
-
-motor[liftassembly1] = -100;
-motor[leftfrontdrive] = 100;
-motor[leftbackdrive] = 100;
-motor[rightfrontdrive] = 100;
-motor[rightbackdrive] = 100;
-}
-
-motor[leftfrontdrive] = 0;
-motor[leftbackdrive] = 0;
-motor[rightfrontdrive] = 0;
-motor[rightbackdrive] = 0;
-
-
-
-
-
-
-
-
-  while (true)
-  {}
+	DriveMotorsForward();  //Drive onto ramp (hopefully)
+	wait10Msec(300);
+	StopDriveMotors();
 }
