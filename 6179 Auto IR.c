@@ -98,6 +98,7 @@ task main()
 	}
 	StopDriveMotors();
 
+
 	motor[bucketwrist] = -100;
 	wait10Msec(500);
 	motor[bucketwrist] = 0;
@@ -114,33 +115,38 @@ task main()
 
 	motor[liftassembly1] = 0;
 
+	wait10Msec(30);
+
 	TurnRight();
-	wait1Msec(457);
+	wait1Msec(1000);
 
 	StopDriveMotors();
+	wait10Msec(30);
 
 	while(SensorValue(ultrasonic) > 40)
 	{
-
-		motor[liftassembly1] = -100;
 		DriveMotorsForward();
 	}
 	StopDriveMotors();
+	wait10Msec(30);
 
 	TurnLeft();        //Turn to be perpendicular to ramp
-	wait10Msec(45);
-	StopDriveMotors();
-
-	DriveMotorsForward(); // Drive alongside  ramp
 	wait10Msec(100);
 	StopDriveMotors();
+	wait10Msec(30);
+
+	DriveMotorsForward(); // Drive alongside  ramp
+	wait10Msec(200);
+	StopDriveMotors();
+	wait10Msec(30);
 
 	TurnLeft();           // turn to face ramp
-	wait10Msec(45);
+	wait10Msec(98);
 	StopDriveMotors();
+	wait10Msec(30);
 
 	DriveMotorsForward();  //Drive onto ramp (hopefully)
-	wait10Msec(50);
+	wait10Msec(300);
 	StopDriveMotors();
 
 
