@@ -89,9 +89,9 @@ task main()
 	motor[liftassembly1] = 0;
 
 
-	if(SensorValue(ultrasonic) > 30)
+	if(SensorValue(ultrasonic) > 25)
 	{
-		while(SensorValue(ultrasonic) > 30)
+		while(SensorValue(ultrasonic) > 25)
 		{
 			DriveMotorsForward();
 		}
@@ -131,7 +131,7 @@ task main()
 	wait10Msec(30);
 
 	TurnLeft();        //Turn to be perpendicular to ramp
-	wait10Msec(100);
+	wait10Msec(75);
 	StopDriveMotors();
 	wait10Msec(30);
 
@@ -141,12 +141,12 @@ task main()
 	wait10Msec(30);
 
 	TurnLeft();           // turn to face ramp
-	wait10Msec(98);
+	wait10Msec(107);
 	StopDriveMotors();
 	wait10Msec(30);
 
 	DriveMotorsForward();  //Drive onto ramp (hopefully)
-	wait10Msec(300);
+	wait10Msec(200);
 	StopDriveMotors();
 
 
